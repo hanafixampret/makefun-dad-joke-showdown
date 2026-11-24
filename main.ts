@@ -1,20 +1,18 @@
-import { mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import * as fs from "node:fs";
 
-const JOKE =
-  "I asked my dad why he mows the lawn in straight lines. He said, 'So the neighbors know I'm not cutting corners.'";
+// Dad Joke Showdown: one dad joke, at most 200 characters.
+// The grader runs this in a sandbox and reads /output/entry.txt.
+const joke =
+  "I told my son learning guitar is easy: you just pick it up, and if it sounds terrible, you can always fret about it later.";
 
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
-mkdirSync(outDir, { recursive: true });
+const length = [...joke].length;
+if (length < 1 || length > 200) {
+  throw new Error(`joke must be 1-200 characters, got ${length}`);
+}
+if (joke.trim() !== joke || joke.includes("\n") || joke.includes("\r")) {
+  throw new Error("joke must be a single trimmed line");
+}
 
-const joke = JOKE.trim();
-if (joke.length < 1 || joke.length > 200) {
-  throw new Error(`dad joke must be 1-200 characters, got ${joke.length}`);
-}
-if (!/\S/.test(joke)) {
-  throw new Error("dad joke must not be only whitespace");
-}
-if (/\r|\n/.test(joke)) {
-  throw new Error("dad joke must be a single line");
-}
-writeFileSync(join(outDir, "entry.txt"), joke, "utf8");
+fs.mkdirSync("/output", { recursive: true });
+fs.writeFileSync("/output/entry.txt", joke, "utf8");
+process.stdout.write(`entry.txt written: ${length} characters\n`);

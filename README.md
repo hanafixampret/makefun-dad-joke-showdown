@@ -6,7 +6,7 @@
 
 One dad joke, under 200 characters. `main.ts` writes it to `<output>/entry.txt` so the AI judge can compare it head to head against the other entries.
 
-The joke: "I asked my dad why he mows the lawn in straight lines. He said, 'So the neighbors know I'm not cutting corners.'"
+The joke: "I told my son learning guitar is easy: you just pick it up, and if it sounds terrible, you can always fret about it later."
 
 ## Run it
 
